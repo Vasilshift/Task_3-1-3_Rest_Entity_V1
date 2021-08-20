@@ -2,7 +2,7 @@ package com.example.web.controller;
 
 import com.example.web.exceptionHandling.NoSuchUserException;
 import com.example.web.model.User;
-import com.example.web.service.InitServiceImpl;
+//import com.example.web.service.InitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.web.service.RoleService;
 import com.example.web.service.UserService;
@@ -21,20 +21,13 @@ public class MyRestController {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final InitServiceImpl initServiceImpl;
 
     @Autowired
-    public MyRestController(UserService userService, RoleService roleService,
-                            InitServiceImpl initServiceImpl) {
+    public MyRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.initServiceImpl = initServiceImpl;
     }
 
-    @PostConstruct
-    public void firstInitialization() {
-        initServiceImpl.initServiceImpl();
-    }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> allUsers(Model model) {

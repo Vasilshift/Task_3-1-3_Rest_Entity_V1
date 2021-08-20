@@ -2,7 +2,7 @@ package com.example.web.controller;
 
 import com.example.web.model.Role;
 import com.example.web.model.User;
-import com.example.web.service.InitServiceImpl;
+//import com.example.web.service.InitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.web.service.RoleService;
 import com.example.web.service.UserService;
@@ -20,20 +20,20 @@ public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final InitServiceImpl initServiceImpl;
+//    private final InitServiceImpl initServiceImpl;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService,
-                           InitServiceImpl initServiceImpl) {
+    public AdminController(UserService userService, RoleService roleService
+                           ) {
         this.userService = userService;
         this.roleService = roleService;
-        this.initServiceImpl = initServiceImpl;
+
     }
 
-    @PostConstruct
-    public void firstInitialization() {
-        initServiceImpl.initServiceImpl();
-    }
+//    @PostConstruct
+//    public void firstInitialization() {
+//        initServiceImpl.init();
+//    }
 
     @GetMapping()
     public String findAll(Model model){

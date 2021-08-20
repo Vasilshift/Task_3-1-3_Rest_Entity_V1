@@ -1,15 +1,24 @@
 package com.example.web;
 
+//import com.example.web.service.InitServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class ApllicationSpring {
 
+
+
 	public static void main(String[] args) {
 
 
+
 		SpringApplication.run(ApllicationSpring.class, args);
+
+
 
 //		String url = "http://localhost:8080/login";
 //		String os = System.getProperty("os.name").toLowerCase(); // получаем имя операционной системы
@@ -35,4 +44,6 @@ public class ApllicationSpring {
 //		}
 //	}
 	}
+
+
 }
