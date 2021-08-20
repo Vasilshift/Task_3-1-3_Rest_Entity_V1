@@ -64,10 +64,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-
-
 }
