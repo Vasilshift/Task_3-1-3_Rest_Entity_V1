@@ -1,17 +1,21 @@
 package com.example.web.controller;
 
+import com.example.web.model.Role;
+import com.example.web.model.User;
 import com.example.web.service.InitServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.web.service.RoleService;
 import com.example.web.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -31,13 +35,22 @@ public class AdminController {
         initServiceImpl.initServiceImpl();
     }
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "adminPage";
+    @GetMapping()
+    public String findAll(Model model){
+        List<User> users = userService.allUsers();
+        List<Role> roles = roleService.allRoles();
+        model.addAttribute("users", users);
+        model.addAttribute("allRoles", roles);
+        return "user-list";
     }
+//    @GetMapping("/admin")
+//    public String admin() {
+//        return "adminPage";
+//    }
+//
+//    @GetMapping(value = "/user")
+//    public String user() {
+//        return "userPage";
+//    }
 
-    @GetMapping(value = "/user")
-    public String user() {
-        return "userPage";
-    }
 }

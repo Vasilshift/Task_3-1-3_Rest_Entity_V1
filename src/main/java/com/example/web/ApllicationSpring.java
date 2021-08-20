@@ -4,12 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Task311Application {
+public class ApllicationSpring {
 
 	public static void main(String[] args) {
 
 
-		SpringApplication.run(Task311Application.class, args);
+		SpringApplication.run(ApllicationSpring.class, args);
 
 //		String url = "http://localhost:8080/login";
 //		String os = System.getProperty("os.name").toLowerCase(); // получаем имя операционной системы

@@ -1,13 +1,17 @@
 package com.example.web.model;
 
 import lombok.Data;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -22,8 +26,8 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "lastname")
     private String lastname;
@@ -40,14 +44,28 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(String name, String lastname, int age, Set<Role> roles) {
-        this.name = name;
+    public User(int id, String username, String lastname, int age, String email, String password, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
         this.lastname = lastname;
         this.age = age;
+        this.email = email;
+        this.password = password;
         this.roles = roles;
     }
 
     public User() {
+    }
+
+    public String getNameRole(){
+        ArrayList<Role> roles = new ArrayList<>(getRoles());
+        String role = roles.stream().map(Role::getName).map(t -> t.toString().replace("ROLE_", "")).collect(Collectors.joining(" "));
+        return role;
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
     }
 
     @Override

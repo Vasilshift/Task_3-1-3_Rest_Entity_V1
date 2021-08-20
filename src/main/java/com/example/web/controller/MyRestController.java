@@ -51,10 +51,10 @@ public class MyRestController {
     }
 
     @PostMapping("/users")
-    public User add(@RequestBody User user){
+    public ResponseEntity<User> add(@RequestBody User user){
         roleService.setupRoles(user);
         userService.add(user);
-        return user;
+        return new ResponseEntity<User> (user,  HttpStatus.OK);
     }
 
     @PutMapping("/users")

@@ -1,10 +1,13 @@
 package com.example.web.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
+@EqualsAndHashCode(of = "name")
 @Data
 @Entity
 @Table(name = "roles")
@@ -17,6 +20,9 @@ public class Role implements GrantedAuthority {
 
     @Column
     private String name;
+
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+//    private Set<User> users;
 
     public Role() {
     }
