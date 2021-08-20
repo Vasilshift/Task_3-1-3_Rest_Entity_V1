@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="/static.js/css/styles.css" rel="stylesheet">
+  <script>
+  let jsTriggers = document.querySelectorAll('.js-tab-trigger');
+
+  jsTriggers.forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      let id = this.getAttribute('data-tab'),
+              content = document.querySelector('.js-tab-content[data-tab="'+id+'"]'),
+              activeTrigger = document.querySelector('.js-tab-trigger.active'),
+              activeContent = document.querySelector('.js-tab-content.active');
+
+      activeTrigger.classList.remove('active');
+      trigger.classList.add('active');
+
+      activeContent.classList.remove('active');
+      content.classList.add('active');
+    });
+  });
+
+</script>
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Общий контейнер для табов -->
+    <div class="tabs">
+      <div class="col-2 left-col">
+        <div class="row">
+          <!--  Контейнер с вкладками   -->
+          <ul class="tab-header">
+            <li class="tab-header__item js-tab-trigger active" data-tab="1">Admin</li>
+            <li class="tab-header__item js-tab-trigger" data-tab="2">User</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-10 left-col">
+        <!--  Контейнер с блоками, которые содержат контент вкладок   -->
+        <ul class="tab-content">
+          <li class="tab-content__item js-tab-content active" data-tab="1">
+            <div class="left-col col-10 vh-100">
+              <div class="row container mt-5">
+                <h3>Admin panel</h3>
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">User table</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/user-create">New user</a>
+                  </li>
+                </ul>
+                <div class="all-users" >
+                  <h4>All users</h4>
+                </div>
+                <div class="table-users">
+                  <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">username</th>
+                      <th scope="col">lastname</th>
+                      <th scope="col">Age</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user: ${users}">
+                      <td th:text="${user.getId()}"></td>
+                      <td th:text="${user.getUsername()}"></td>
+                      <td th:text="${user.getLastname()}"></td>
+                      <td th:text="${user.getAge()}"></td>
+                      <td th:text="${user.getEmail()}"></td>
+                      <td th:text="${user.getNameRole()}"></td>
+
+                      <form th:method="GET" th:action="@{/admin/user-update/{id}(id=${user.getId()})}">
+                        <td><input class="form-control edit-user" type="submit" value="Edit" ></td>
+                      </form>
+                      <form th:method="DELETE" th:action="@{/admin/user-delete/{id}(id=${user.getId()})}">
+                        <td><input class="form-control delete-user" type="submit" value="Delete"></td>
+                      </form>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="tab-content__item js-tab-content" data-tab="2">
+            <div th:insert="blocks/one-user-in-main :: name-user"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="/static.js/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>

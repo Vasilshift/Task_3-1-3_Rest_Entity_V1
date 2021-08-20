@@ -41,7 +41,7 @@ public class AdminController {
         List<Role> roles = roleService.allRoles();
         model.addAttribute("users", users);
         model.addAttribute("allRoles", roles);
-        return "user-list";
+        return "myadminpage";
     }
 //    @GetMapping("/admin")
 //    public String admin() {
